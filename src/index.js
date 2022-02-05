@@ -4,6 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// mirage server
+import { makeServer } from "./server"
+
+if (process.env.NODE_ENV === "development") {
+  makeServer({ environment: "development" })
+}
+// mirage server
+
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

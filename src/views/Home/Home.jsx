@@ -1,20 +1,13 @@
 // import {useEffect} from 'react';
 import { HomeBanners , CategoryItems , Container } from '../../components'
 import styles from './home.style.module.css'
-import productImage from '../../assets/images/product1.jpg'
-import { useEffect } from 'react'
-const products = [
-    {id:1, title:'kafsh meli', price:30000, image:productImage, description:'kafsh ba davam'},
-    {id:2, title:'kafsh meli', price:30000, image:productImage, description:'kafsh ba davam'},
-    {id:3, title:'kafsh meli', price:30000, image:productImage, description:'kafsh ba davam'},
-    {id:4, title:'kafsh meli', price:30000, image:productImage, description:'kafsh ba davam'},
-    {id:5, title:'kafsh meli', price:30000, image:productImage, description:'kafsh ba davam'},
-]
+import { useEffect , useState } from 'react'
 
 const Home = () => {
-  useEffect(() => {
-        fetch('/api/products').then(res => res.json()).then(data => console.log(data))
-  }, [])
+    const[products , setProducts] = useState([])
+    useEffect(() => {
+        fetch('/api/products').then(res => res.json()).then(data => setProducts(data.products))
+    }, [])
   return(
         <div style={{padding:20}}>
             <HomeBanners />
