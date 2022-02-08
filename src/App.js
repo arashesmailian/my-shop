@@ -7,6 +7,7 @@ import {
   Routes,
 } from "react-router-dom";
 import Home from './views/Home/Home';
+import Cart from './views/Cart/Cart';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<MainLayout />} >
         <Route index element={<Home />} />
         <Route path="products/:productId" element={<ProductSingle />} />
+        <Route path='cart' element={<Cart />} />
       </Route>
       {/* <Route path="about" element={<div>About page</div>} /> */}
     </Routes>

@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+//for redux
+import store from './redux/store'
+import { Provider } from 'react-redux'
 
 // mirage server
 import { makeServer } from "./server"
@@ -15,7 +18,9 @@ if (process.env.NODE_ENV === "development") {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
