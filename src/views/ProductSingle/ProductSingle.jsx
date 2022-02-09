@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 import { CategoryItems } from '../../components';
 import productImage from '../../assets/images/product1.jpg'
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {addToCart} from '../../redux/reducers/cart.reducer'
+
 
 const products = [
     {id:1, title:'kafsh meli', price:30000, image:productImage, description:'kafsh ba davam'},
@@ -17,6 +20,7 @@ const products = [
 ]
 
 const ProductSingle = () => {
+    const dispatch = useDispatch()
     const {productId} = useParams()
     const [product, setProduct] = useState({})
     const [error, setError] = useState(false) //for erroe while getting from mirage
@@ -59,7 +63,7 @@ const ProductSingle = () => {
                 <div className={styles.product_seller}>
                     <div>{product.price}</div>
                     <div>
-                        <button className={styles.product_add_to_cart}>add to cart</button>
+                        <button onClick={() => dispatch(addToCart(product))} className={styles.product_add_to_cart}>add to cart</button>
                     </div>
                 </div>
             </section>

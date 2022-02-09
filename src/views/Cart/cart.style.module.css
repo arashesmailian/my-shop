@@ -41,4 +41,5 @@
 .Cart_item_info {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }

@@ -2,24 +2,42 @@ import React from 'react';
 import styles from './cart.menu.style.module.css';
 import { Link } from 'react-router-dom';
 import CartMenuItem from '../CartMenuItem/CartMenuItem';
+import { useSelector, useDispatch } from 'react-redux'
 
 const CartMenu = ({show , setShow}) => {
-  const total_price = 10
-  return (
+  const items = useSelector(state => state.cart.items)
+  const total_price = useSelector(
+      (state) => state.cart.items.reduce(
+          (price , item) => price + (item.price * item.count), 
+          0)) // we can use this instead of useMemo
+//   const total_price = useMemo( ()=>items.reduce((price , item) => price + (item.price * item.count) , 0), [items]) // every time we render totalprice will calculate, so we use useMemo ro prevent this if price wans't changed
+    const total_count = useSelector(
+        (state) => state.cart.items.reduce(
+            (count , item) => count + item.count, 
+            0))
+return (
       <div onMouseLeave={()=>setShow(false)} style={{
           display:show ? 'block':"none"
       }} className={styles.CartMenu}>
             <div className={styles.CartNav}>
                 <Link className={styles.link} to='/cart' >مشاهده سبد خرید</Link>
-                <p>1 کالا</p>
+                <p>{total_count} کالا</p>
             </div>
             <ul>
-                <li>
-                    <CartMenuItem />
-                </li>
-                <li>
-                    <CartMenuItem />
-                </li>
+                {
+                    items.map(item => {
+                        return(
+                            <li key={item.id}>
+                                <CartMenuItem 
+                                    title={item.title} 
+                                    description={item.description}
+                                    src={item.image}
+                                    count={item.count} 
+                                />
+                            </li>
+                        )
+                    })
+                }
             </ul>
             <div className={styles.CartMenu_order}>
                 <div>
