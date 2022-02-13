@@ -4,6 +4,8 @@ import ProductCard from "./ProductCard/ProductCard";
 import CategoryItems from "./CategoryItems/CategoryItems";
 import Container from "./Container/Container";
 import CartMenu from "./CartMenu/CartMenu";
+import withAuth from "./PrivateRoute/PrivateRoute";
+import withSpinner from "./withSpinner/withSpinner";
 export {
     HomeBanners,
     ProductList,
@@ -11,4 +13,6 @@ export {
     CategoryItems,
     Container,
     CartMenu,
+    withAuth,
+    withSpinner,
 }

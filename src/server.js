@@ -140,6 +140,7 @@ export function makeServer({ environment = "test" } = {}) {
       },
 
     routes() {
+      this.timing = 3000
       this.namespace = "api"
       
       //register route
@@ -187,7 +188,7 @@ export function makeServer({ environment = "test" } = {}) {
           )
       })
       
-      this.timing = 2000
+      // this.timing = 2000
       this.get("/products", (schema) => {
         return schema.products.all()
       })

@@ -1,14 +1,13 @@
-import {useEffect , useState} from 'react';
 import {BiHeart} from "react-icons/bi"; 
 import {BiShareAlt} from "react-icons/bi"; 
 import {BiBellPlus} from "react-icons/bi"; 
 import styles from './product.single.style.module.css'
 import { Link } from 'react-router-dom';
-import { CategoryItems } from '../../components';
+import { CategoryItems , withSpinner } from '../../components';
 import productImage from '../../assets/images/product1.jpg'
-import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {addToCart} from '../../redux/reducers/cart.reducer'
+import { getProduct } from '../../api/products.api';
 
 
 const products = [
@@ -19,21 +18,8 @@ const products = [
     {id:5, title:'kafsh meli', price:30000, image:productImage, description:'kafsh ba davam'},
 ]
 
-const ProductSingle = () => {
+const ProductSingle = ({product}) => {
     const dispatch = useDispatch()
-    const {productId} = useParams()
-    const [product, setProduct] = useState({})
-    const [error, setError] = useState(false) //for erroe while getting from mirage
-    useEffect(() => {
-        setError(false)
-        fetch('/api/products/' + productId).then(res => {
-            if(res.status === 200) {return res.json()}
-            else {setError(true)}
-        }).then(data => setProduct(data.product))
-    }, [productId])
-    if (error){
-        return('there is a problem please try again')
-    }
   return (
         <div style={{backgroundColor:"#fff" , padding:32}}>
             <section>
@@ -79,4 +65,4 @@ const ProductSingle = () => {
   )
 }
 
-export default ProductSingle;
+export default withSpinner(ProductSingle , getProduct);
