@@ -1,11 +1,13 @@
 import {useState} from 'react';
 import { ReactComponent as SiteLogo } from '../../assets/svg/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import styles from './header.style.module.css'
 import {BiUser} from "react-icons/bi"; 
 import {BiCart} from "react-icons/bi"; 
+import {BiLogOut} from "react-icons/bi"; 
 import { CartMenu } from '..';
 import { useSelector } from 'react-redux';
+import Auth from '../../api/localStorage';
 
 const Header = () => {
   const total_count = useSelector(
@@ -36,7 +38,16 @@ const Header = () => {
                         </div>
                         <CartMenu show={show} setShow={setShow} />
                     </div>
-                    <div><BiUser size={'28px'} /></div>
+                    <div>
+                        <Link to='/profile'>
+                            <BiUser size={'28px'} />
+                        </Link>
+                    </div>
+                    <div style={{cursor:'pointer'}} onClick={() => {
+                        Auth.logout();
+                    }}>
+                        <BiLogOut size={'28px'} />
+                    </div>
                 </div>
                 <div className={styles.header_tope_left}>
                     <input />

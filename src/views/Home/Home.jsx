@@ -2,11 +2,14 @@
 import { HomeBanners , CategoryItems , Container } from '../../components'
 import styles from './home.style.module.css'
 import { useEffect , useState } from 'react'
-
+// import axios from '../../api/setup';
+import { getProducts } from '../../api/products.api';
+import axios from 'axios';
 const Home = () => {
     const[products , setProducts] = useState([])
     useEffect(() => {
-        fetch('/api/products').then(res => res.json()).then(data => setProducts(data.products))
+        getProducts().then(data => setProducts(data.products)).catch(res => alert(res.status))
+        // fetch('/api/products').then(res => res.json()).then(data => setProducts(data.products))
     }, [])
   return(
         <div style={{padding:20}}>

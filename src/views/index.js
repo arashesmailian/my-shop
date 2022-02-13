@@ -1,2 +1,7 @@
 import Home from "./Home/Home";
-export {Home}
+import Cart from "./Cart/Cart";
+
+export {
+    Home,
+    Cart,
+}
